@@ -26,7 +26,7 @@ public class Todo {
     @GeneratedValue(strategy = GenerationType.IDENTITY) // Id 자동부여
     private Long tno;
     private String title;
-    private String whiter;
+    private String writer;
     private boolean complete;
     private LocalDate dueDate;
 }
