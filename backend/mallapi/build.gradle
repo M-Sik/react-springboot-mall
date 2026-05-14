@@ -34,6 +34,30 @@ dependencies {
 	annotationProcessor 'com.querydsl:querydsl-apt:5.0.0:jakarta'
 	annotationProcessor 'jakarta.annotation:jakarta.annotation-api'
 	annotationProcessor 'jakarta.persistence:jakarta.persistence-api'
+
+	implementation 'org.modelmapper:modelmapper:3.2.2'
+}
+
+sourceSets {
+	main {
+		java {
+			// Put Querydsl-generated sources in a stable source dir so IDEs don't exclude it.
+			srcDir "src/main/generated"
+		}
+	}
+}
+
+tasks.withType(JavaCompile).configureEach {
+	// Ensure annotation processors write into src/main/generated (main compile only).
+	if (name == "compileJava") {
+		options.generatedSourceOutputDirectory = file("src/main/generated")
+	}
+}
+
+tasks.named("clean") {
+	doFirst {
+		delete "src/main/generated"
+	}
 }
 
 tasks.named('test') {

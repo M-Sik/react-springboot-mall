@@ -18,8 +18,8 @@ import lombok.ToString;
 @Getter
 @ToString
 @Builder
-@AllArgsConstructor
-@NoArgsConstructor
+@AllArgsConstructor // 빌더 사용시 항상 선언
+@NoArgsConstructor // 빌더 사용시 항상 선언
 public class Todo {
     
     @Id
