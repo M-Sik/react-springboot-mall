@@ -24,9 +24,21 @@ public class Todo {
     
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY) // Id 자동부여
-    private Long tno;
-    private String title;
-    private String writer;
-    private boolean complete;
-    private LocalDate dueDate;
+    private Long tno; // 사용자가 변경 불가
+    private String title; // 사용자가 변경 가능
+    private String writer; // 사용자가 변경 불가
+    private boolean complete; // 사용자가 변경 가능
+    private LocalDate dueDate; // 사용자가 변경 가능
+
+    public void changeDueDate(LocalDate dueDate) {
+        this.dueDate = dueDate;
+    }
+
+    public void changeTittle(String title) {
+        this.title = title;
+    }
+
+    public void changeComplete(Boolean complete) {
+        this.complete = complete;
+    }
 }

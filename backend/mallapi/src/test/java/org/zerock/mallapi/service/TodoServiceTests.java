@@ -12,7 +12,7 @@ import lombok.extern.log4j.Log4j2;
 
 @SpringBootTest
 @Log4j2
-@Transactional
+@Transactional // 테스트코드로 인해 db(쿼리) 수정 및 접근시 롤백 되는 어노테이션
 public class TodoServiceTests {
 
     @Autowired
@@ -36,5 +36,16 @@ public class TodoServiceTests {
 
         TodoDTO todoDTO = todoService.get(tno);
         log.info(todoDTO);
+    }
+
+    @Test
+    public void testModify() {
+        TodoDTO todoDTO = TodoDTO.builder()
+                .tno(694L)
+                .title("test update title")
+                .complete(true)
+                .dueDate(LocalDate.of(2026, 5, 14))
+                .build();
+        todoService.modify(todoDTO);
     }
 }
