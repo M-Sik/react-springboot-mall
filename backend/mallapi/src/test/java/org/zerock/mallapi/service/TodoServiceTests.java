@@ -5,6 +5,8 @@ import java.time.LocalDate;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.zerock.mallapi.dto.PageRequestDTO;
+import org.zerock.mallapi.dto.PageResponseDTO;
 import org.zerock.mallapi.dto.TodoDTO;
 
 import jakarta.transaction.Transactional;
@@ -47,5 +49,16 @@ public class TodoServiceTests {
                 .dueDate(LocalDate.of(2026, 5, 14))
                 .build();
         todoService.modify(todoDTO);
+    }
+
+    //list() 테스트코드
+    @Test
+    public void testList() {
+        log.info("-----------");
+        PageRequestDTO pageRequestDTO = PageRequestDTO.builder().build();
+        
+        PageResponseDTO<TodoDTO> dto = todoService.list(pageRequestDTO);
+        // log.info(dto);
+        log.info("pageNumList => " + dto.getPageNumList());
     }
 }
