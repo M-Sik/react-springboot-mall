@@ -15,6 +15,9 @@ import org.springframework.data.domain.Sort;
 import org.springframework.transaction.annotation.Transactional;
 import org.zerock.mallapi.domain.QTodo;
 import org.zerock.mallapi.domain.Todo;
+import org.zerock.mallapi.dto.PageRequestDTO;
+import org.zerock.mallapi.dto.PageResponseDTO;
+import org.zerock.mallapi.dto.TodoDTO;
 
 import com.querydsl.jpa.JPQLQueryFactory;
 
@@ -142,5 +145,16 @@ public class TodoRepositoryTests {
         java.util.List<Todo> list = queryFactory.selectFrom(qTodo).where(qTodo.title.contains("11")).fetch();
 
         log.info(list);
+    }
+
+    @Test
+    public void testSearch3() {
+        String keyword = "";
+        PageRequestDTO requestDTO = PageRequestDTO.builder().build();
+
+        // todo repository에 search
+        PageResponseDTO<TodoDTO> responseDTO = todoRepository.search(keyword, requestDTO);
+
+        log.info("todoRepository testSearch3 => " + responseDTO);
     }
 }

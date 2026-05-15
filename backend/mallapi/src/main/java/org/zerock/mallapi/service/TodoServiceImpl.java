@@ -77,7 +77,7 @@ public class TodoServiceImpl implements TodoService {
 
         // todoRepository 호출
         // pageable이 파라미터로 들어가면 무조건 리턴 타입은 Page임.
-        Page<Todo> result = todoRepository.findAll(pageable);
+        Page<Todo> result = todoRepository.findAll(pageable); // findByTitleContaining 사용해야하는거 아닌가?
         List<TodoDTO> dtoList = result.getContent().stream()
             .map(todo -> modelMapper.map(todo, TodoDTO.class))
             .collect(Collectors.toList());
